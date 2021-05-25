@@ -12,7 +12,7 @@ namespace rest
 
         public static int _personelId;
         public static int _gorevId;
-
+        public static int _id;
         public static string _ButttonValue;
         public static string _ButtonName;
     }
