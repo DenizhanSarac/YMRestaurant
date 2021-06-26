@@ -38,14 +38,14 @@ namespace rest
 
         private void btnPaketServis_Click(object sender, EventArgs e)
         {
-            frmSiparis frm = new frmSiparis();
+            frmSiparisKontrol frm = new frmSiparisKontrol();
             this.Close();
             frm.Show();
         }
 
         private void btnMusteriler_Click(object sender, EventArgs e)
         {
-            frmMusteriler frm = new frmMusteriler();
+            frmMusteriAra frm = new frmMusteriAra();
             this.Close();
             frm.Show();
         }
@@ -66,9 +66,8 @@ namespace rest
 
         private void btnRaporlar_Click(object sender, EventArgs e)
         {
-            frmRaporlar frm = new frmRaporlar();
-            this.Close();
-            frm.Show();
+            
+            
         }
 
         private void btnAyarlar_Click(object sender, EventArgs e)
@@ -86,6 +85,19 @@ namespace rest
         }
 
         private void btnCikis_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Çıkmak istediğinizden emin misiniz ?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Çıkmak istediğinizden emin misiniz ?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {

@@ -144,7 +144,7 @@ namespace rest
         public void personelGetbyInformation(ComboBox cb) {
             cb.Items.Clear();
             SqlConnection con = new SqlConnection(gnl.conString);
-            SqlCommand cmd = new SqlCommand("Select * from Personeller", con);
+            SqlCommand cmd = new SqlCommand("Select * from Personeller where Durum=0", con);
 
             if (con.State == ConnectionState.Closed)
             {
@@ -174,5 +174,232 @@ namespace rest
         public override string ToString() {
             return PersonelAd +" " +PersonelSoyad;
         }
+
+        public void personelBilgileriniGetirLV(ListView lv)
+        {
+            lv.Items.Clear();
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select Personeller.*,personelGorevleri.GOREV from Personeller Inner Join personelGorevleri on personelGorevleri.ID=personeller.GOREVID where Personeller.Durum=0", con);
+            
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            int i = 0;
+            while (dr.Read())
+            {
+                lv.Items.Add(dr["ID"].ToString());
+                lv.Items[i].SubItems.Add(dr["GOREVID"].ToString());
+                lv.Items[i].SubItems.Add(dr["GOREV"].ToString());
+                lv.Items[i].SubItems.Add(dr["AD"].ToString());
+                lv.Items[i].SubItems.Add(dr["SOYAD"].ToString());
+                lv.Items[i].SubItems.Add(dr["KULLANICIADI"].ToString());
+                i++;
+
+
+            }
+            dr.Close();
+            con.Close();
+
+
+        }
+
+        public void personelBilgileriniGetirfromIDLV(ListView lv,int perID)
+        {
+            lv.Items.Clear();
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select Personeller.*,personelGorevleri.GOREV from Personeller Inner Join personelGorevleri on personelGorevleri.ID=personeller.GOREVID where Personeller.Durum=0 and Personeller.ID=@perId", con);
+            cmd.Parameters.Add("@perId", SqlDbType.Int).Value = perID;
+
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            int i = 0;
+            while (dr.Read())
+            {
+                lv.Items.Add(dr["ID"].ToString());
+                lv.Items[i].SubItems.Add(dr["GOREVID"].ToString());
+                lv.Items[i].SubItems.Add(dr["GOREV"].ToString());
+                lv.Items[i].SubItems.Add(dr["AD"].ToString());
+                lv.Items[i].SubItems.Add(dr["SOYAD"].ToString());
+                lv.Items[i].SubItems.Add(dr["KULLANICIADI"].ToString());
+                i++;
+
+
+            }
+            dr.Close();
+            con.Close();
+
+
+        }
+
+        public string personelBilgiGetirIsim(int perId)
+        {
+            string sonuc = "";
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select AD from Personeller where Personeller.Durum=0 and Personeller.ID=@perId", con);
+            cmd.Parameters.Add("@perId", SqlDbType.Int).Value = perId;
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                sonuc =Convert.ToString(cmd.ExecuteScalar());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+
+
+            con.Close();
+            return sonuc;
+        }
+
+        public bool personelSifreDegistir(int personelID,string pass)
+        {
+            bool sonuc = false;
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Update personeller set PAROLA=@pass where ID=@perId", con);
+            cmd.Parameters.Add("@perId", SqlDbType.Int).Value = personelID;
+            cmd.Parameters.Add("@pass", SqlDbType.VarChar).Value = pass;
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+
+
+            con.Close();
+
+
+            return sonuc;
+        }
+
+        public bool personelEkle(cPersoneller cp)
+        {
+            bool sonuc = false;
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Insert into Personeller(AD,SOYAD,PAROLA,GOREVID) values (@AD,@SOYAD,@PAROLA,@GOREVID) ", con);
+            cmd.Parameters.Add("@AD", SqlDbType.VarChar).Value = _PersonelAd;
+            cmd.Parameters.Add("@SOYAD", SqlDbType.VarChar).Value = _PersonelSoyad;
+            cmd.Parameters.Add("@PAROLA", SqlDbType.VarChar).Value = _PersonelParola;
+            cmd.Parameters.Add("@GOREVID", SqlDbType.Int).Value = _PersonelGorevId;
+            
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+
+
+            con.Close();
+
+
+            return sonuc;
+        }
+
+        public bool personelGuncelle(cPersoneller cp,int perId)
+        {
+            bool sonuc = false;
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Update Personeller set AD=@AD,SOYAD=@SOYAD,PAROLA=@PAROLA,GOREVID=@GOREVID where ID=@perId ", con);
+            cmd.Parameters.Add("@perId", SqlDbType.Int).Value = perId;
+            cmd.Parameters.Add("@AD", SqlDbType.VarChar).Value = _PersonelAd;
+            cmd.Parameters.Add("@SOYAD", SqlDbType.VarChar).Value = _PersonelSoyad;
+            cmd.Parameters.Add("@PAROLA", SqlDbType.VarChar).Value = _PersonelParola;
+            cmd.Parameters.Add("@GOREVID", SqlDbType.Int).Value = _PersonelGorevId;
+            
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+
+
+            con.Close();
+
+
+            return sonuc;
+        }
+
+        public bool personelSil(int perId)
+        {
+            bool sonuc = false;
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Update Personeller set Durum=1 where ID=@perId ", con);
+            cmd.Parameters.Add("@perId", SqlDbType.Int).Value = perId;
+            
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+
+
+            con.Close();
+
+
+            return sonuc;
+        }
+
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,14 +21,14 @@ namespace rest
         private void btnCikis_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Çıkmak istediğinizden emin misiniz ?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
+            {   
                 Application.Exit();
             }
         }
 
         private void btnGeriDon_Click(object sender, EventArgs e)
         {
-            frmMenu frm = new frmMenu();
+            frmMasalar frm = new frmMasalar();
             this.Close();
             frm.Show();
         }
@@ -76,12 +77,26 @@ namespace rest
         int tableId;
         int AdditionId;
 
-        private void frmSiparis_Load(object sender, EventArgs e) { 
+        private void frmSiparis_Load(object sender, EventArgs e) {
 
-            lblMasaNo.Text = cGenel._ButttonValue;
+            if (cGenel._ButttonValue==null)
+            {
+                lblMasaNo.Text = "Paket";
+                cGenel._ButtonName = null;
+            }
+            else
+            {
+                lblMasaNo.Text = cGenel._ButttonValue;
+            }
+            
+
             cMasalar ms = new cMasalar();
 
-            tableId = ms.TableGetbyNumber(cGenel._ButtonName);
+            if (cGenel._ButttonValue!=null)
+            {
+                tableId = ms.TableGetbyNumber(cGenel._ButtonName);
+            }
+            
             if (ms.TableGetbyState(tableId,2)==true || ms.TableGetbyState(tableId, 4) == true)
             {
                 cAdisyon Ad = new cAdisyon();
@@ -155,11 +170,13 @@ namespace rest
                 sayac = lvSiparisler.Items.Count;
                 lvSiparisler.Items.Add(lvMenu.SelectedItems[0].Text);
                 lvSiparisler.Items[sayac].SubItems.Add(txtAdet.Text);
+
+               
                 lvSiparisler.Items[sayac].SubItems.Add(lvMenu.SelectedItems[0].SubItems[2].Text);
-                lvSiparisler.Items[sayac].SubItems.Add((Convert.ToDecimal(lvMenu.SelectedItems[0].SubItems[1].Text)*Convert.ToDecimal(txtAdet.Text)).ToString());
+                lvSiparisler.Items[sayac].SubItems.Add((Convert.ToDecimal(lvMenu.SelectedItems[0].SubItems[1].Text) * Convert.ToDecimal(txtAdet.Text)).ToString());
                 lvSiparisler.Items[sayac].SubItems.Add("0");
                 sayac2 = lvYeniEklenenler.Items.Count;
-                lvSiparisler.Items[sayac].SubItems.Add(sayac.ToString());
+                lvSiparisler.Items[sayac].SubItems.Add(sayac2.ToString());
 
                 lvYeniEklenenler.Items.Add(AdditionId.ToString());
                 lvYeniEklenenler.Items[sayac2].SubItems.Add(lvMenu.SelectedItems[0].SubItems[2].Text);
@@ -171,28 +188,27 @@ namespace rest
                 txtAdet.Text = "";
             }
         }
-
-        private void btn2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        ArrayList silinler = new ArrayList();
         private void btnSiparis_Click(object sender, EventArgs e)
         {
+            //1-Masa Boş
+            //2-Masa Dolu
+            //3-Masa Rezerve
+            //4-Dolu Rezerve
+
+
             cMasalar masa = new cMasalar();
             frmMasalar ms = new frmMasalar();
             cAdisyon newAddition = new cAdisyon();
             cSiparis saveOrder = new cSiparis();
 
+            cPaketler paketSiparis = new cPaketler();
+
             bool sonuc = false;
 
-            if (masa.TableGetbyState(tableId,1)==true)
+            if (masa.TableGetbyState(tableId, 1) == true)
             {
+                
                 newAddition.ServisTurNo = 1;
                 newAddition.PersonelId = 1;
                 newAddition.MasaId = tableId;
@@ -200,7 +216,7 @@ namespace rest
                 sonuc = newAddition.setByAdditionNew(newAddition);
                 masa.setChangeTableState(cGenel._ButtonName, 2);
 
-                if (lvSiparisler.Items.Count>0)
+                if (lvSiparisler.Items.Count > 0)
                 {
                     for (int i = 0; i < lvSiparisler.Items.Count; i++)
                     {
@@ -215,6 +231,144 @@ namespace rest
                     ms.Show();
                 }
             }
+            else if(masa.TableGetbyState(tableId, 2) == true || masa.TableGetbyState(tableId,4)==true)
+            {
+                
+                if (lvYeniEklenenler.Items.Count > 0)
+                {
+                    for (int i = 0; i < lvYeniEklenenler.Items.Count; i++)
+                    {
+                        saveOrder.MasaId = tableId;
+                        saveOrder.UrunId = Convert.ToInt32(lvYeniEklenenler.Items[i].SubItems[1].Text);
+                        saveOrder.AdisyonID = newAddition.getByAddition(tableId);
+                        saveOrder.Adet = Convert.ToInt32(lvYeniEklenenler.Items[i].SubItems[2].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+                    
+                }
+                if (silinler.Count > 0) {
+                    foreach (string item in silinler)
+                    {
+                        saveOrder.setDeleteOrder(Convert.ToInt32(item));
+                    }
+                }
+                this.Close();
+                ms.Show();
+            }
+            else if (masa.TableGetbyState(tableId, 3) == true)
+            {
+                
+                //newAddition.ServisTurNo = 1;
+                //newAddition.PersonelId = 1;
+                //newAddition.MasaId = tableId;
+                //newAddition.Tarih = DateTime.Now;
+                //sonuc = newAddition.setByAdditionNew(newAddition);
+                masa.setChangeTableState(cGenel._ButtonName, 4);
+
+                if (lvSiparisler.Items.Count > 0)
+                {
+                    for (int i = 0; i < lvSiparisler.Items.Count; i++)
+                    {
+                        saveOrder.MasaId = tableId;
+                        saveOrder.UrunId = Convert.ToInt32(lvSiparisler.Items[i].SubItems[2].Text);
+                        saveOrder.AdisyonID = newAddition.getByAddition(tableId);
+                        saveOrder.Adet = Convert.ToInt32(lvSiparisler.Items[i].SubItems[1].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+
+                    this.Close();
+                    ms.Show();
+                }
+            }
+            else if (lblMasaNo.Text=="Paket")
+            {
+
+                newAddition.ServisTurNo = 2;
+                newAddition.PersonelId = 1;
+                newAddition.Tarih = DateTime.Now;
+                sonuc = newAddition.setByAdditionNew(newAddition);
+
+
+                if (lvSiparisler.Items.Count > 0)
+                {
+                    for (int i = 0; i < lvSiparisler.Items.Count; i++)
+                    {
+                        saveOrder.UrunId = Convert.ToInt32(lvSiparisler.Items[i].SubItems[2].Text);
+                        saveOrder.AdisyonID = newAddition.getByAdditionPaket(newAddition.ServisTurNo);
+                        saveOrder.Adet = Convert.ToInt32(lvSiparisler.Items[i].SubItems[1].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+
+                    this.Close();
+                    ms.Show();
+                }
+
+                paketSiparis.AdditionID = newAddition.getByAdditionPaket(newAddition.ServisTurNo);
+                paketSiparis.Paytypeid = 1;
+                paketSiparis.CilentId = cGenel._musteriId;
+                paketSiparis.Description = "Paket Sipariş";
+                paketSiparis.OrderSeriveceOpen(paketSiparis);
+            }
+        }
+
+        private void lvSiparisler_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvSiparisler.Items.Count > 0)
+            {
+                if (lvSiparisler.SelectedItems[0].SubItems[4].Text != "0")
+                {
+                    cSiparis saveOrder = new cSiparis();
+                    saveOrder.setDeleteOrder(Convert.ToInt32(lvSiparisler.SelectedItems[0].SubItems[4].Text));
+                }
+                else
+                {
+                    for (int i = 0; i < lvYeniEklenenler.Items.Count; i++)
+                    {
+                        if (lvYeniEklenenler.Items[i].SubItems[4].Text == lvSiparisler.SelectedItems[0].SubItems[5].Text) {
+                            lvYeniEklenenler.Items.RemoveAt(i);
+                        }
+
+                    }
+                }
+                lvSiparisler.Items.RemoveAt(lvSiparisler.SelectedItems[0].Index);
+            }
+        }
+
+        private void txtAra_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAra.Text=="")
+            {
+                txtAra.Text = "";
+            }
+            else
+            {
+                cUrunCesitleri cu = new cUrunCesitleri();
+                cu.getByProductSearch(lvMenu,Convert.ToInt32(txtAra.Text));
+            }
+        }
+
+        private void btnOdeme_Click(object sender, EventArgs e)
+        {
+            cGenel._ServisTurNo = 1;
+            cGenel._AdisyonId = AdditionId.ToString();
+            frmBill frm = new frmBill();
+            this.Close();
+            frm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvSiparisler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTemizle_Click(object sender, EventArgs e)
+        {
+            txtAdet.Text = "";
         }
     }
 }

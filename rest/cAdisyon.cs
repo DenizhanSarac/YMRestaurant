@@ -5,12 +5,15 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace rest
 {
     class cAdisyon
     {
         cGenel gnl = new cGenel();
+        
+
 
         #region Fields
         private int _ID;
@@ -122,6 +125,8 @@ namespace rest
             cmd.Parameters.Add("@MasaId", SqlDbType.Int).Value = MasaId;
             try
             {
+
+
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
@@ -138,6 +143,32 @@ namespace rest
                 con.Close();
             }
             return MasaId;
+        }
+
+        public int getByAdditionPaket(int servisturno)
+        {
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select top 1 ID From Adisyonlar Where SERVISTURNO=@ServisTurNo Order by ID desc", con);
+
+            cmd.Parameters.Add("@ServisTurNo", SqlDbType.Int).Value = servisturno;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                servisturno = Convert.ToInt32(cmd.ExecuteScalar());
+
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return servisturno;
         }
 
         public bool setByAdditionNew(cAdisyon Bilgiler)
@@ -172,6 +203,201 @@ namespace rest
 
             return sonuc;
             
+        }
+
+        public void adisyonkapat(int adisyonID,int durum)
+        {
+            
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Update adisyonlar set durum=@durum where ID=@adisyonID", con);
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                cmd.Parameters.Add("@adisyonID", SqlDbType.Int).Value = adisyonID;
+                cmd.Parameters.Add("@durum", SqlDbType.Int).Value = durum;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+            
+        }
+
+        public int paketAdisyonIdbulAdedi()
+        {
+            int miktar = 0;
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select count(*) as Sayi from adisyonlar where (Durum=0) and (SERVISTURNO=2)", con);
+
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            try
+            {
+                miktar = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+                
+            }
+
+
+            return miktar;
+        }
+
+        public void acikPaketAdisyonlar(ListView lv)
+        {
+            lv.Items.Clear();
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select paketSiparis.MUSTERIID,Musteriler.Ad + ' ' + Musteriler.Soyad as Musteri,Adisyonlar.ID as adisyonId from paketSiparis Inner Join Musteriler on Musteriler.ID=paketSiparis.MUSTERIID Inner Join adisyonlar on adisyonlar.ID=paketSiparis.ADISYONID where Adisyonlar.Durum=0", con);
+            SqlDataReader dr = null;
+            
+
+            
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                dr=cmd.ExecuteReader();
+                int sayac = 0;
+                while (dr.Read())
+                {
+                    lv.Items.Add(dr["MUSTERIID"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["Musteri"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["adisyonId"].ToString());  
+                    sayac++;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                dr.Close();
+                con.Dispose();
+                con.Close();
+            }
+
+        }
+
+        public int musterininsonadisyonId(int musteriId)
+        {
+            int sonuc = 0;
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select adisyonlar.ID from adisyonlar Inner join paketSiparis on paketSiparis.ADISYONID=adisyonlar.ID where paketSiparis.durum=0 and adisyonlar.durum=0 and paketSiparis.MUSTERIID=@musteriId ", con);
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@musteriId", SqlDbType.Int).Value = musteriId;
+
+                sonuc = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+
+            return sonuc;
+        }
+
+        public void musteriDetaylar(ListView lv, int musteriId)
+        {
+            lv.Items.Clear();
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select paketSiparis.MUSTERIID,paketSiparis.ADISYONID,musteriler.AD,musteriler.SOYAD,CONVERT(varchar(10),adisyonlar.TARIH,104) as tarih from adisyonlar inner join paketSiparis on paketSiparis.ADISYONID = adisyonlar.ID Inner join musteriler on musteriler.ID = paketSiparis.MUSTERIID where adisyonlar.SERVISTURNO = 2 and paketSiparis.MUSTERIID = @musteriId", con);
+
+            cmd.Parameters.Add("@musteriId", SqlDbType.Int).Value = musteriId;
+            SqlDataReader dr = null;
+
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            try
+            {
+                int sayac = 0;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    lv.Items.Add(dr["MUSTERIID"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["AD"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["SOYAD"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["tarih"].ToString());
+                    lv.Items[sayac].SubItems.Add(dr["ADISYONID"].ToString());
+
+
+                    sayac++;
+                }
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+
+            }
+        }
+
+        public int RezervasyonAdisyonAc(cAdisyon bilgiler)
+        {
+            int sonuc = 0;
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Insert Into Adisyonlar(SERVISTURNO,TARIH,PERSONELID,MASAID)values(@ServisTurNo,@Tarih,@PersonelID,@MasaId);select scope_IDENTITY()", con);
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@ServisTurNo", SqlDbType.Int).Value = bilgiler.ServisTurNo;
+                cmd.Parameters.Add("@Tarih", SqlDbType.DateTime).Value = bilgiler.Tarih;
+                cmd.Parameters.Add("@PersonelID", SqlDbType.Int).Value = bilgiler.PersonelId;
+                cmd.Parameters.Add("@MasaId", SqlDbType.Int).Value = bilgiler.MasaId;
+                sonuc = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+            return sonuc;
         }
     }
 }

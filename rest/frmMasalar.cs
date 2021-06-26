@@ -52,14 +52,14 @@ namespace rest
                     {
                         if (item.Name == "btnMasa" + dr["ID"].ToString()&& dr["DURUM"].ToString() == "1")
                         {
-                            item.BackColor=Color.Green;
+                            item.BackColor=Color.DarkSeaGreen;
                         }
                         else if (item.Name == "btnMasa" + dr["ID"].ToString() && dr["DURUM"].ToString() == "2")
                         {
                             cMasalar ms = new cMasalar();
-                            DateTime dt1 = Convert.ToDateTime(ms.SessionSum(2));
+                            DateTime dt1 = Convert.ToDateTime(ms.SessionSum(2,dr["ID"].ToString()));
                             DateTime dt2 = DateTime.Now;
-                            string st1 = Convert.ToDateTime(ms.SessionSum(2)).ToShortTimeString();
+                            string st1 = Convert.ToDateTime(ms.SessionSum(2, dr["ID"].ToString())).ToShortTimeString();
                             string st2 = DateTime.Now.ToShortTimeString();
 
                             DateTime t1 = dt1.AddMinutes(DateTime.Parse(st1).TimeOfDay.TotalMinutes);
@@ -67,10 +67,10 @@ namespace rest
 
                             var fark = t2 - t1;
 
-                            item.Text = item.Text +"\n"+ String.Format("{0}{1}{2}",
-                               fark.Days>0 ? string.Format("{0} gün",fark.Days) :"",
-                               fark.Hours>0? string.Format("{0} saat", fark.Hours) : "",
-                               fark.Minutes > 0 ? string.Format("{0} dakika", fark.Minutes) : "" ).Trim()+"\n\n\nMasa"+dr["ID"].ToString();
+                            item.Text = item.Text + "\n\n\n\n\n" + String.Format("{0}{1}{2}",
+                               fark.Days > 0 ? string.Format("{0} Gün ", fark.Days) : "",
+                               fark.Hours > 0 ? string.Format("{0} Saat ", fark.Hours) : "",
+                               fark.Minutes > 0 ? string.Format("{0} Dakika", fark.Minutes) : "");
 
                             item.BackColor = Color.Red;
                         }

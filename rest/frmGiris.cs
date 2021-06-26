@@ -19,8 +19,30 @@ namespace rest
         
         private void frmGiris_Load(object sender, EventArgs e)
         {
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += Timer1_Tick;
+
+            cbKullanici.Height = 46;
+            
+            this.WindowState = FormWindowState.Maximized;
+            
             cPersoneller p = new cPersoneller();
             p.personelGetbyInformation(cbKullanici);
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            //Random rnd = new Random();
+
+            //int x = rnd.Next(255);
+            //int y = rnd.Next(255);
+            //int z = rnd.Next(255);
+            //label1.ForeColor = Color.FromArgb(x, y, z);
+
+            label6.Text = DateTime.Now.ToLongTimeString();
+            label5.Text = DateTime.Today.ToLongDateString();
+
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
@@ -62,9 +84,13 @@ namespace rest
             }
         }
 
-        private void txtSifre_TextChanged(object sender, EventArgs e)
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
+
+       
+
+       
     }
 }

@@ -9,10 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>rest</RootNamespace>
     <AssemblyName>rest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,8 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +58,27 @@
     <Compile Include="cAdisyon.cs" />
     <Compile Include="cGenel.cs" />
     <Compile Include="cMasalar.cs" />
+    <Compile Include="cMusteriler.cs" />
+    <Compile Include="cOdeme.cs" />
+    <Compile Include="cPaketler.cs" />
+    <Compile Include="cPersonelGorev.cs" />
     <Compile Include="cPersonelHareketleri.cs" />
     <Compile Include="cPersoneller.cs" />
+    <Compile Include="cRezervasyon.cs" />
     <Compile Include="cSiparis.cs" />
     <Compile Include="cUrunCesitleri.cs" />
+    <Compile Include="cUrunler.cs" />
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBill.Designer.cs">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGiris.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,11 +109,11 @@
     <Compile Include="frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMusteriler.cs">
+    <Compile Include="frmMusteriAra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMusteriler.Designer.cs">
-      <DependentUpon>frmMusteriler.cs</DependentUpon>
+    <Compile Include="frmMusteriAra.Designer.cs">
+      <DependentUpon>frmMusteriAra.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMutfak.cs">
       <SubType>Form</SubType>
@@ -96,11 +121,11 @@
     <Compile Include="frmMutfak.Designer.cs">
       <DependentUpon>frmMutfak.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRaporlar.cs">
+    <Compile Include="frmPaketSiparis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRaporlar.Designer.cs">
-      <DependentUpon>frmRaporlar.cs</DependentUpon>
+    <Compile Include="frmPaketSiparis.Designer.cs">
+      <DependentUpon>frmPaketSiparis.cs</DependentUpon>
     </Compile>
     <Compile Include="frmRezervasyon.cs">
       <SubType>Form</SubType>
@@ -120,10 +145,31 @@
     <Compile Include="frmSiparis.Designer.cs">
       <DependentUpon>frmSiparis.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSiparisKontrol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSiparisKontrol.Designer.cs">
+      <DependentUpon>frmSiparisKontrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MusteriEkleme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusteriEkleme.Designer.cs">
+      <DependentUpon>MusteriEkleme.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmBill.resx">
+      <DependentUpon>frmBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGiris.resx">
       <DependentUpon>frmGiris.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKasaIslemleri.resx">
+      <DependentUpon>frmKasaIslemleri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLock.resx">
+      <DependentUpon>frmLock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMasalar.resx">
       <DependentUpon>frmMasalar.cs</DependentUpon>
@@ -131,8 +177,29 @@
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMusteriAra.resx">
+      <DependentUpon>frmMusteriAra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMutfak.resx">
+      <DependentUpon>frmMutfak.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaketSiparis.resx">
+      <DependentUpon>frmPaketSiparis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRezervasyon.resx">
+      <DependentUpon>frmRezervasyon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSiparis.resx">
       <DependentUpon>frmSiparis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSiparisKontrol.resx">
+      <DependentUpon>frmSiparisKontrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusteriEkleme.resx">
+      <DependentUpon>MusteriEkleme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -142,7 +209,20 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <Fakes Include="Fakes\Microsoft.ReportViewer.Common.fakes" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -155,6 +235,81 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\loginbutton.png" />
+    <Content Include="Resources\1.jpg" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\Salata.png" />
+    <None Include="Resources\tatli.png" />
+    <None Include="Resources\tatlı.png" />
+    <None Include="Resources\odeme.png" />
+    <None Include="Resources\payment.png" />
+    <None Include="Resources\order.png" />
+    <None Include="Resources\number-c.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\anayemek.png" />
+    <None Include="Resources\Icecek.jpg" />
+    <None Include="Resources\drink.png" />
+    <None Include="Resources\FastFood.png" />
+    <None Include="Resources\corbaa.png" />
+    <None Include="Resources\Makarna.png" />
+    <None Include="Resources\makarnaa.png" />
+    <None Include="Resources\arasicak.png" />
+    <Content Include="Resources\eatArka.jpg" />
+    <None Include="Resources\eatArka1.jpg" />
+    <Content Include="Resources\flatSiparis.jpg" />
+    <None Include="Resources\flatSiparis1.jpg" />
+    <None Include="Resources\MutfakAra.png" />
+    <None Include="Resources\MutfakDuzenle.png" />
+    <None Include="Resources\MutfakEkle.png" />
+    <None Include="Resources\MutfakSil.png" />
+    <None Include="Resources\HesapKapat.png" />
+    <None Include="Resources\HesapOzeti.png" />
+    <Content Include="Resources\forkandknife.png" />
+    <None Include="Resources\forkandknife1.png" />
+    <Content Include="Resources\number-eight.png" />
+    <None Include="Resources\number-zero1.png" />
+    <None Include="Resources\number-eight1.png" />
+    <Content Include="Resources\number-five.png" />
+    <None Include="Resources\number-five1.png" />
+    <Content Include="Resources\number-four.png" />
+    <None Include="Resources\number-four1.png" />
+    <Content Include="Resources\number-nine.png" />
+    <None Include="Resources\number-nine1.png" />
+    <Content Include="Resources\number-one.png" />
+    <None Include="Resources\number-one1.png" />
+    <Content Include="Resources\number-seven.png" />
+    <None Include="Resources\number-seven1.png" />
+    <Content Include="Resources\number-six.png" />
+    <None Include="Resources\number-six1.png" />
+    <Content Include="Resources\number-three.png" />
+    <None Include="Resources\number-three1.png" />
+    <Content Include="Resources\number-two.png" />
+    <None Include="Resources\number-two1.png" />
+    <Content Include="Resources\number-zero.png" />
+    <None Include="Resources\timetable.png" />
+    <None Include="Resources\pos.png" />
+    <None Include="Resources\mutfak.png" />
+    <None Include="Resources\pakets.png" />
+    <None Include="Resources\statistics-512.png" />
+    <None Include="Resources\settings-512.png" />
+    <None Include="Resources\Customers_Filled-512.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\login.png" />
+    <None Include="Resources\login1.png" />
+    <None Include="Resources\exit2.png" />
+    <Content Include="Resources\masa.png" />
+    <None Include="Resources\loginbutton.png" />
+    <None Include="Resources\background.jpg" />
+    <None Include="Resources\as.jpg" />
+    <None Include="Resources\smile.jpg" />
+    <None Include="Resources\aa.jpg" />
+    <None Include="Resources\3.jfif" />
+    <None Include="Resources\2.jpg" />
+    <None Include="Resources\ımg.jpg" />
+    <None Include="Resources\LoginBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

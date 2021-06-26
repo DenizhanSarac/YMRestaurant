@@ -1,37 +1,24 @@
-c:\users\kara\documents\visual studio 2015\Projects\rest\rest\bin\Debug\rest.exe.config
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\bin\Debug\rest.exe
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\bin\Debug\rest.pdb
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.frmGiris.resources
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.Properties.Resources.resources
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.csproj.GenerateResource.Cache
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.exe
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.pdb
-C:\Users\Kara\documents\visual studio 2015\Projects\rest\rest\obj\Debug\rest.frmMenu.resources
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.frmMasalar.resources
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.frmSiparis.resources
-C:\Users\Kara\Documents\Visual Studio 2015\Projects\rest\rest\obj\Debug\rest.csprojResolveAssemblyReference.cache
-C:\Users\hasan\Desktop\rest\rest\bin\Debug\rest.exe.config
-C:\Users\hasan\Desktop\rest\rest\bin\Debug\rest.exe
-C:\Users\hasan\Desktop\rest\rest\bin\Debug\rest.pdb
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.csprojResolveAssemblyReference.cache
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.frmGiris.resources
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.frmMasalar.resources
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.frmMenu.resources
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.frmSiparis.resources
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.Properties.Resources.resources
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.csproj.GenerateResource.Cache
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.csproj.CoreCompileInputs.cache
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.exe
-C:\Users\hasan\Desktop\rest\rest\obj\Debug\rest.pdb
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\bin\Debug\rest.exe.config
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.exe
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.pdb
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\bin\Debug\rest.exe
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\bin\Debug\rest.pdb
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.csprojResolveAssemblyReference.cache
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.frmGiris.resources
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.frmMasalar.resources
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.frmMenu.resources
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.frmSiparis.resources
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.Properties.Resources.resources
-C:\Users\dnzhn\Desktop\Yazılım Mühendisliğ\Proje\restaurant\rest\rest\obj\Debug\rest.csproj.GenerateResource.Cache
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\bin\Debug\rest.exe.config
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.csprojResolveAssemblyReference.cache
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmBill.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmGiris.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmKasaIslemleri.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmLock.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmMasalar.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmMenu.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmMusteriAra.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmMutfak.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmPaketSiparis.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmRezervasyon.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmSetting.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmSiparis.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.frmSiparisKontrol.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.MusteriEkleme.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.Properties.Resources.resources
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.csproj.GenerateResource.Cache
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.csprojFakesResolveAssemblyReference.cache
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\bin\Debug\rest.exe
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\bin\Debug\rest.pdb
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.exe
+C:\Users\dnzhn\Downloads\rest\rest\rest\rest\obj\Debug\rest.pdb
