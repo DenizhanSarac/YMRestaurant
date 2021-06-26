@@ -10,6 +10,8 @@ namespace rest
     {
         public string conString = ("Server=.;Database=itadakimasu;Trusted_Connection=True");
 
+
+
         public static int _personelId;
         public static int _gorevId;
         public static int _musteriEkleme;

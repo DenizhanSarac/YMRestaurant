@@ -20,6 +20,8 @@ namespace rest
         private int _masaId; 
         #endregion
 
+
+
         #region Properties
         public int Id
         {
