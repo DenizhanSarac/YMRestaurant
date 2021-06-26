@@ -41,6 +41,7 @@ namespace rest
                 lblAdisyonId.Text = cGenel._AdisyonId;
                 txtIndirimTutari.TextChanged +=new EventHandler(txtIndirimTutari_TextChanged);
                 cs.getByOrder(lvUrunler, Convert.ToInt32(lblAdisyonId.Text));
+
                 if (lvUrunler.Items.Count>0)
                 {
                     decimal toplam = 0;
@@ -67,6 +68,7 @@ namespace rest
                 }
                 txtIndirimTutari.Clear();
             }
+
             else if (cGenel._ServisTurNo == 2)
             {
                 lblAdisyonId.Text = cGenel._AdisyonId;
@@ -80,10 +82,12 @@ namespace rest
                     rbNakit.Checked = true;
 
                 }
+
                 else if (odemeTuru == 2)
                 {
                     rbKrediKarti.Checked = true;
                 }
+
                 else if (odemeTuru == 3)
                 { 
                     rbTicket.Checked = true;
@@ -107,6 +111,7 @@ namespace rest
                 {
                     gbIndirim.Visible = false;
                 }
+
                 else
                 {
                     gbIndirim.Visible = true;

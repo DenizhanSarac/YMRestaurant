@@ -41,17 +41,20 @@ namespace rest
                         {
                             MessageBox.Show("Müşteri Eklendi");
                         }
+
                         else
                         {
                             MessageBox.Show("HATA Müşteri Eklenemedi!!!!!");
                         }
                     }
+
                     else
                     {
                         MessageBox.Show("Kayıt Zaten Var");
                     }
                 }
             }
+
             else
             {
                 MessageBox.Show("Lütfen en az 7 haneli bir telefon numarası girin.");
@@ -95,6 +98,7 @@ namespace rest
                 {
                     MessageBox.Show("Lütfen Müşterinin Ad ve Soyad bilgilerini doldurunuz.");
                 }
+
                 else
                 {
                     cMusteriler c = new cMusteriler();
@@ -117,12 +121,14 @@ namespace rest
                             MessageBox.Show("HATA Müşteri güncellenemedi!!!!!");
                         }
                     }
+
                     else
                     {
                         MessageBox.Show("Kayıt Zaten Var");
                     }
                 }
             }
+
             else
             {
                 MessageBox.Show("Lütfen en az 7 haneli bir telefon numarası girin.");
@@ -142,7 +148,9 @@ namespace rest
             {
                 btnEkle.Visible = false;
             }
+
             else if (sayi==0)
+
             {
                 btnEkle.Visible = true;
             }
@@ -154,7 +162,9 @@ namespace rest
             {
                 btnGuncelle.Visible = true;
             }
+
             else if (sayi==1)
+
             {
                 btnGuncelle.Visible = false;
             }

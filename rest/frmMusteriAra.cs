@@ -86,6 +86,7 @@ namespace rest
                 cGenel._AdisyonId = txtAdisyonId.Text;
                 cPaketler c = new cPaketler();
                 bool sonuc = c.getCheckOpenAdditionID(Convert.ToInt32(txtAdisyonId.Text));
+
                 if (sonuc)
                 {
                     frmBill frm = new frmBill();
@@ -98,7 +99,7 @@ namespace rest
                 }
             }
             else
-            {
+            {   //mesaj
                 MessageBox.Show("Aramak istediğiniz adisyonu yazınız");
             }
 
@@ -113,6 +114,8 @@ namespace rest
 
         private void lvMusteriler_DoubleClick(object sender, EventArgs e)
         {
+
+
             frmSiparis frm = new frmSiparis();
             cGenel._musteriId = Convert.ToInt32(lvMusteriler.SelectedItems[0].SubItems[0].Text);
             cGenel._ButttonValue =null;
