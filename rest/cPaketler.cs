@@ -7,11 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace rest
-<<<<<<< HEAD
-{ 
-=======
 {
->>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
     class cPaketler
     {
         cGenel gnl = new cGenel();
@@ -102,11 +98,7 @@ namespace rest
                 _Paytypeid = value;
             }
         }
-<<<<<<< HEAD
-        #endregion 
-=======
         #endregion
->>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
         //paket açma
         public bool OrderSeriveceOpen(cPaketler order)
         {

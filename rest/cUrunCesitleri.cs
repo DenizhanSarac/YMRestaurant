@@ -10,8 +10,8 @@ using System.Windows.Forms;
 namespace rest
 {
     class cUrunCesitleri
-    { 
-        cGenel gnl = new cGenel(); 
+    {
+        cGenel gnl = new cGenel();
 
         #region Fields
         private int _UrunTurNo;

@@ -12,10 +12,6 @@ namespace rest
     class cAdisyon
     {
         cGenel gnl = new cGenel();
-        
-
-
-
 
         #region Fields
         private int _ID;
@@ -127,8 +123,6 @@ namespace rest
             cmd.Parameters.Add("@MasaId", SqlDbType.Int).Value = MasaId;
             try
             {
-
-
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();

@@ -11,11 +11,6 @@ namespace rest
 {
     class cMusteriler
     {
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
         cGenel gnl = new cGenel();
 
         private int _musteriid;

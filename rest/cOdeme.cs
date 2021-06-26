@@ -13,11 +13,6 @@ namespace rest
     class cOdeme
     {
         cGenel gnl = new cGenel();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
        
         #region Fields
         private int _OdemeID;

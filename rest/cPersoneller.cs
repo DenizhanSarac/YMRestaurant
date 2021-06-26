@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace rest 
+namespace rest
 {
     class cPersoneller
     {
@@ -22,7 +22,7 @@ namespace rest
         private string _PersonelKullaniciAdi;
         private bool _PersonelDurum;
         #endregion
-         
+
         #region Properties
         public int PersonelId
         {
