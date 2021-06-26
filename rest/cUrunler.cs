@@ -19,7 +19,11 @@ namespace rest
         private string _urunad;
         private decimal _fiyat;
         private string _aciklama;
+<<<<<<< HEAD
+        #endregion 
+=======
         #endregion
+>>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
         #region property
 
         public string Aciklama
@@ -59,7 +63,11 @@ namespace rest
             lv.Items.Clear();
             SqlConnection con = new SqlConnection(gnl.conString);
             SqlCommand cmd = new SqlCommand("select * from urunler Where Durum=0 and URUNAD like '&' + @urunAdi   + '&'", con);
+<<<<<<< HEAD
+            SqlDataReader dr = null; 
+=======
             SqlDataReader dr = null;
+>>>>>>> 0633e52559559d0d1823dcfe5c82ab9be877ca14
 
             cmd.Parameters.Add("@urunAdi", SqlDbType.VarChar).Value = urunadi;
 
